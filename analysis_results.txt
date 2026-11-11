@@ -1,0 +1,90 @@
+Training cars: 168
+Test cars: 72
+
+Baseline predicted sale price: $25,851.19
+
+INITIAL MODEL — TRAINING RESULTS
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             Sale_Price   R-squared:                       0.873
+Model:                            OLS   Adj. R-squared:                  0.869
+Method:                 Least Squares   F-statistic:                     222.7
+Date:                Tue, 10 Nov 2026   Prob (F-statistic):           1.19e-70
+Time:                        20:11:53   Log-Likelihood:                -1559.5
+No. Observations:                 168   AIC:                             3131.
+Df Residuals:                     162   BIC:                             3150.
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+=================================================================================================================
+                                                    coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------------------------
+Intercept                                       2.17e+04   1093.279     19.847      0.000    1.95e+04    2.39e+04
+C(Accident, Treatment(reference="no"))[T.yes] -2171.7835    511.560     -4.245      0.000   -3181.970   -1161.597
+Mileage_K                                       -78.5928     13.879     -5.663      0.000    -105.999     -51.187
+Age_Years                                     -1300.6404    185.074     -7.028      0.000   -1666.110    -935.171
+Horsepower                                       75.0158      4.747     15.801      0.000      65.641      84.391
+Num_Owners                                       62.9248    370.489      0.170      0.865    -668.686     794.535
+==============================================================================
+Omnibus:                        0.977   Durbin-Watson:                   2.077
+Prob(Omnibus):                  0.614   Jarque-Bera (JB):                0.634
+Skew:                          -0.112   Prob(JB):                        0.728
+Kurtosis:                       3.201   Cond. No.                     1.14e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.14e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+MODEL WITHOUT NUMBER OF OWNERS — TRAINING RESULTS
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             Sale_Price   R-squared:                       0.873
+Model:                            OLS   Adj. R-squared:                  0.870
+Method:                 Least Squares   F-statistic:                     280.0
+Date:                Tue, 10 Nov 2026   Prob (F-statistic):           6.78e-72
+Time:                        20:11:53   Log-Likelihood:                -1559.5
+No. Observations:                 168   AIC:                             3129.
+Df Residuals:                     163   BIC:                             3145.
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+=================================================================================================================
+                                                    coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------------------------
+Intercept                                      2.176e+04   1023.723     21.258      0.000    1.97e+04    2.38e+04
+C(Accident, Treatment(reference="no"))[T.yes] -2176.6377    509.238     -4.274      0.000   -3182.191   -1171.085
+Mileage_K                                       -78.1533     13.595     -5.749      0.000    -104.997     -51.309
+Age_Years                                     -1291.6311    176.781     -7.306      0.000   -1640.707    -942.555
+Horsepower                                       75.0204      4.733     15.850      0.000      65.674      84.367
+==============================================================================
+Omnibus:                        0.917   Durbin-Watson:                   2.079
+Prob(Omnibus):                  0.632   Jarque-Bera (JB):                0.585
+Skew:                          -0.109   Prob(JB):                        0.746
+Kurtosis:                       3.190   Cond. No.                     1.07e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.07e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+TRAINING MODEL COMPARISON
+             Model  Training R-squared  Training adjusted R-squared
+ All five features              0.8730                       0.8691
+Without Num_Owners              0.8730                       0.8698
+
+TEST RESULTS — 72 CARS
+   Model  Test R-squared  Test RMSE ($)
+Baseline         -0.0137      6494.1540
+      v1          0.8227      2716.1433
+
+Saved chart: test_price_predictions.png
+
+AUCTION RESULTS — 40 LOTS
+    Rule  Cars bought  Money-losing cars bought  Total profit ($)
+Baseline           14                        10             -6000
+      v1           17                         6             15800
+
+v1 profit minus baseline profit: $21,800.00
+
+Saved auction_decisions.csv and auction_summary.csv
